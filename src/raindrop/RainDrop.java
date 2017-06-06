@@ -21,9 +21,9 @@ public class RainDrop extends Application {
     public void start(Stage primaryStage) {
         int i;
         Pane root = new Pane();
-     
-        for (i = 0; i < 1200; i+=80) {
-   CubicCurve cubicCurve = new CubicCurve();
+
+        for (i = 0; i < 3200; i += 80) {
+            CubicCurve cubicCurve = new CubicCurve();
             drop(i, cubicCurve);
             System.out.println("Hello");
             root.getChildren().add(cubicCurve);
@@ -44,18 +44,20 @@ public class RainDrop extends Application {
 
     private void drop(int i, CubicCurve cubicCurve) {
         //Drawing a cubic curve 
-int y=(i/320)*80;
+        int y = (i / 320) * 80;
         //Setting properties to cubic curve
- int x=i-((i/320)*320);
+        int x = i - ((i / 320) * 320);
         System.out.println(x);
-        cubicCurve.setStartX(x);
-        cubicCurve.setStartY(y);
-        cubicCurve.setControlX1(x + 40);
-        cubicCurve.setControlY1(y + 140);
-        cubicCurve.setControlX2(x + 140);
-        cubicCurve.setControlY2(y + 140);
-        cubicCurve.setEndX(x);
-        cubicCurve.setEndY(y);
+        cubicCurve.setStartX(0);
+        cubicCurve.setStartY(0);
+        cubicCurve.setControlX1(40);
+        cubicCurve.setControlY1(140);
+        cubicCurve.setControlX2(140);
+        cubicCurve.setControlY2(140);
+        cubicCurve.setEndX(0);
+        cubicCurve.setEndY(0);
+        cubicCurve.setTranslateX(x);
+        cubicCurve.setTranslateY(y);
 
     }
 
