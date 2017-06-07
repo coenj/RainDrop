@@ -5,11 +5,16 @@
  */
 package raindrop;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.shape.CubicCurve;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -20,17 +25,34 @@ public class RainDrop extends Application {
     @Override
     public void start(Stage primaryStage) {
         int i;
-        Pane root = new Pane();
+        Group root = new Group();
 
-        for (i = 0; i < 3200; i += 80) {
+        for (i = 0; i < 3200; i++) {
             CubicCurve cubicCurve = new CubicCurve();
             drop(i, cubicCurve);
-            System.out.println("Hello");
+            System.out.println("Abstract rain");
             root.getChildren().add(cubicCurve);
         }
+
         Scene scene = new Scene(root, 320, 568);
 
-        primaryStage.setTitle("Hello World!");
+        Timeline timeline = new Timeline();
+
+        timeline.getKeyFrames().addAll(
+                new KeyFrame(Duration.ZERO, // set start position at 0
+                        new KeyValue(root.translateXProperty(), 0),
+                        new KeyValue(root.translateYProperty(), -3200)
+                ),
+                new KeyFrame(new Duration(15000), // set end position at 40s
+                        new KeyValue(root.translateXProperty(), 0),
+                        new KeyValue(root.translateYProperty(), 600)
+                )
+        );
+
+// play 40s of animation
+        timeline.play();
+
+        primaryStage.setTitle("Abstract rain");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -44,9 +66,10 @@ public class RainDrop extends Application {
 
     private void drop(int i, CubicCurve cubicCurve) {
         //Drawing a cubic curve 
-        int y = (i / 320) * 80;
+        
+        int y = (i / 4) * 80;
         //Setting properties to cubic curve
-        int x = i - ((i / 320) * 320);
+        int x = 80 * (i - 4 * (int) (i / 4));
         System.out.println(x);
         cubicCurve.setStartX(0);
         cubicCurve.setStartY(0);
