@@ -5,11 +5,13 @@
  */
 package raindrop;
 
+import static java.lang.Math.random;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
@@ -22,23 +24,23 @@ import javafx.util.Duration;
  * @author ik
  */
 public class RainDrop extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
         int i;
         Group root = new Group();
-        
+
         for (i = 0; i < 3200; i++) {
             CubicCurve cubicCurve = new CubicCurve();
             drop(i, cubicCurve);
             System.out.println("Abstract rain");
             root.getChildren().add(cubicCurve);
         }
-        
+
         Scene scene = new Scene(root, 320, 568);
-        
+
         Timeline timeline = new Timeline();
-        
+
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.ZERO, // set start position at 0
                         new KeyValue(root.translateXProperty(), -700),
@@ -50,9 +52,21 @@ public class RainDrop extends Application {
                 )
         );
 
+        for (Node cubicCurve : root.getChildren()) {
+            timeline.getKeyFrames().addAll(
+                    new KeyFrame(Duration.ZERO, // set start position at 0
+                            new KeyValue(cubicCurve.translateXProperty(), cubicCurve.getTranslateX()*random() * 5),
+                            new KeyValue(cubicCurve.translateYProperty(), cubicCurve.getTranslateY()*random() * 5)
+                    ),
+                    new KeyFrame(new Duration(30000), // set end position at 40s
+                            new KeyValue(cubicCurve.translateXProperty(), cubicCurve.getTranslateX()*random() * 10),
+                            new KeyValue(cubicCurve.translateYProperty(), cubicCurve.getTranslateY()*random() * 5)
+                    )
+            );
+        }
 // play 40s of animation
         timeline.play();
-        
+
         primaryStage.setTitle("Abstract rain");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -64,10 +78,10 @@ public class RainDrop extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     private void drop(int i, CubicCurve cubicCurve) {
         //Drawing a cubic curve 
-        
+
         int y = (i / 16) * 80;
         //Setting properties to cubic curve
         int x = 80 * (i - 16 * (int) (i / 16));
@@ -85,5 +99,5 @@ public class RainDrop extends Application {
         cubicCurve.setStroke(Color.GREEN);
         cubicCurve.setFill(Color.TRANSPARENT);
     }
-    
+
 }
