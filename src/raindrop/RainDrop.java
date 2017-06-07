@@ -55,12 +55,14 @@ public class RainDrop extends Application {
         for (Node cubicCurve : root.getChildren()) {
             timeline.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO, // set start position at 0
-                            new KeyValue(cubicCurve.translateXProperty(), cubicCurve.getTranslateX()*random() * 5),
-                            new KeyValue(cubicCurve.translateYProperty(), cubicCurve.getTranslateY()*random() * 5)
+                            new KeyValue(cubicCurve.translateXProperty(), cubicCurve.getTranslateX()+35*random()),
+                            new KeyValue(cubicCurve.translateYProperty(), cubicCurve.getTranslateY()+25* random()),
+                            new KeyValue(cubicCurve.rotateProperty(),0)
                     ),
                     new KeyFrame(new Duration(30000), // set end position at 40s
-                            new KeyValue(cubicCurve.translateXProperty(), cubicCurve.getTranslateX()*random() * 10),
-                            new KeyValue(cubicCurve.translateYProperty(), cubicCurve.getTranslateY()*random() * 5)
+                            new KeyValue(cubicCurve.translateXProperty(), cubicCurve.getTranslateX()+35*random()),
+                            new KeyValue(cubicCurve.translateYProperty(), cubicCurve.getTranslateY()+35*random()),
+                            new KeyValue(cubicCurve.rotateProperty(),random()*180)
                     )
             );
         }
