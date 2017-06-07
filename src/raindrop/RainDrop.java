@@ -5,11 +5,18 @@
  */
 package raindrop;
 
+import static java.lang.Math.random;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.shape.CubicCurve;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -20,7 +27,7 @@ public class RainDrop extends Application {
     @Override
     public void start(Stage primaryStage) {
         int i;
-        Pane root = new Pane();
+        Group root = new Group();
 
         for (i = 0; i < 3200; i += 80) {
             CubicCurve cubicCurve = new CubicCurve();
@@ -28,7 +35,26 @@ public class RainDrop extends Application {
             System.out.println("Hello");
             root.getChildren().add(cubicCurve);
         }
+         
         Scene scene = new Scene(root, 320, 568);
+         
+         Timeline timeline = new Timeline();
+        
+            timeline.getKeyFrames().addAll(
+                    new KeyFrame(Duration.ZERO, // set start position at 0
+                            new KeyValue(root.translateXProperty(),0),
+                            new KeyValue(root.translateYProperty(),0)
+                    ),
+                    new KeyFrame(new Duration(4000), // set end position at 40s
+                            new KeyValue(root.translateXProperty(), random() * 320),
+                            new KeyValue(root.translateYProperty(), random() * 600)
+                    )
+            );
+        
+// play 40s of animation
+        timeline.play();
+        
+       
 
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
