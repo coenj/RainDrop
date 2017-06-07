@@ -40,10 +40,10 @@ public class RainDrop extends Application {
 
         timeline.getKeyFrames().addAll(
                 new KeyFrame(Duration.ZERO, // set start position at 0
-                        new KeyValue(root.translateXProperty(), 0),
+                        new KeyValue(root.translateXProperty(), -700),
                         new KeyValue(root.translateYProperty(), -3200)
                 ),
-                new KeyFrame(new Duration(15000), // set end position at 40s
+                new KeyFrame(new Duration(25000), // set end position at 40s
                         new KeyValue(root.translateXProperty(), 0),
                         new KeyValue(root.translateYProperty(), 600)
                 )
@@ -67,9 +67,9 @@ public class RainDrop extends Application {
     private void drop(int i, CubicCurve cubicCurve) {
         //Drawing a cubic curve 
         
-        int y = (i / 4) * 80;
+        int y = (i / 16) * 80;
         //Setting properties to cubic curve
-        int x = 80 * (i - 4 * (int) (i / 4));
+        int x = 80 * (i - 16 * (int) (i / 16));
         System.out.println(x);
         cubicCurve.setStartX(0);
         cubicCurve.setStartY(0);
