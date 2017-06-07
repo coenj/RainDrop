@@ -5,6 +5,8 @@
  */
 package raindrop;
 
+import java.io.File;
+import java.io.IOException;
 import static java.lang.Math.random;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -12,12 +14,15 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
 import javafx.scene.shape.CubicCurve;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.imageio.stream.ImageOutputStream;
 
 /**
  *
@@ -81,6 +86,9 @@ public class RainDrop extends Application {
         launch(args);
     }
 
+
+
+ 
     private void drop(int i, CubicCurve cubicCurve) {
         //Drawing a cubic curve 
 
